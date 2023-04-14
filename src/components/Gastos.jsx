@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
 import '../stylesheets/MediaQuerys.css';
+import { API_URL } from '../config.js';
 
 function Gastos() {
 
@@ -18,12 +19,12 @@ function Gastos() {
 
   const obtenerGastosDetalleCategorias = async () => {
     try {
-      const { data } = await axios.get('/api/gastos');
+      const { data } = await axios.get(`${API_URL}/api/gastos`);
       const categorias = [...new Set(data.map((gasto) => gasto.categoria))];
       const gastosPorCategoria = {};
       for (let i = 0; i < categorias.length; i++) {
         const categoria = categorias[i];
-        const response = await axios.get(`/api/gastos/${categoria}`, {
+        const response = await axios.get(`${API_URL}/api/gastos/${categoria}`, {
           params: {
             orden: ordenGastos
           }
@@ -55,7 +56,7 @@ function Gastos() {
     });
     if (result.isConfirmed) {
       try {
-        await axios.delete(`/api/gastos/${id}`);
+        await axios.delete(`${API_URL}/api/gastos/${id}`);
         const newGastos = datosCategoria[catg].filter(gasto => gasto._id !== id);
         const newObjectGastos = { ...datosCategoria, [catg]: newGastos };
         setDatosCategoria(newObjectGastos);
@@ -103,7 +104,7 @@ function Gastos() {
       fecha: fechita
     };
     try {
-      await axios.put(`/api/gastos/${gastoToChange._id}`, newGastoToUpdate);
+      await axios.put(`${API_URL}/api/gastos/${gastoToChange._id}`, newGastoToUpdate);
       //le pedimos  a la API nuevamente todos los datos actualizados...
       obtenerGastosDetalleCategorias();
     } catch {

@@ -6,6 +6,7 @@ import '../stylesheets/Home.css';
 import { Navigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import '../stylesheets/MediaQuerys.css';
+import { API_URL } from '../config.js';
 
 function Home() {
 
@@ -88,7 +89,7 @@ function Home() {
       for (let i = 0; i < fechas.length; i++) {
         arrayObjetos[i] = { x: '', y: 0 };
       }
-      const { data } = await axios.get('/api/gastos/');
+      const { data } = await axios.get(`${API_URL}/api/gastos/`);
       const dataFiltrada = data.filter(gasto => {
         return (((new Date(gasto.fecha).getTime()) >= milis) && ((new Date(gasto.fecha).getTime()) <= new Date().getTime()));
       });
@@ -186,7 +187,7 @@ function Home() {
 
   async function obtenerGastosPorCategoria(milis) {
     try {
-      const { data } = await axios.get('/api/gastos/');
+      const { data } = await axios.get(`${API_URL}/api/gastos/`);
       const dataFiltrada = data.filter(gasto => {
         return (((new Date(gasto.fecha).getTime()) >= milis) && ((new Date(gasto.fecha).getTime()) <= new Date().getTime()));
       });
@@ -215,7 +216,7 @@ function Home() {
 
   async function obtenerEntranteTotal(milis) {
     try {
-      const { data } = await axios.get('/api/entrantes/');
+      const { data } = await axios.get(`${API_URL}/api/entrantes/`);
       const dataFiltrada = data.filter(entrante => {
         return (((new Date(entrante.fecha).getTime()) >= milis) && ((new Date(entrante.fecha).getTime()) <= new Date().getTime()));
       });

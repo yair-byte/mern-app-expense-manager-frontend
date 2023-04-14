@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../stylesheets/MediaQuerys.css';
+import { API_URL } from '../config.js';
 
 function InputGasto() {
 
@@ -38,7 +39,7 @@ function InputGasto() {
         cantidad: inputCantidad,
         fecha: fechita
       }
-      await axios.post('/api/gastos/', newGasto);
+      await axios.post(`${API_URL}/api/gastos/`, newGasto);
       Swal.fire({
         title: 'Exito!',
         text: 'El gasto se agregó satisfactoriamente!',

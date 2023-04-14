@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Swal from 'sweetalert2';
 import '../stylesheets/MediaQuerys.css';
+import { API_URL } from '../config.js';
 
 function Entrantes() {
 
@@ -16,7 +17,7 @@ function Entrantes() {
 
   const obtenerEntrantes = async () => {
     try {
-      const { data } = await axios.get('/api/entrantes', {
+      const { data } = await axios.get(`${API_URL}/api/entrantes`, {
         params: {
           orden: ordenEntrantes
         }
@@ -48,7 +49,7 @@ function Entrantes() {
     });
     if (result.isConfirmed) {
       try {
-        await axios.delete(`/api/entrantes/${id}`);
+        await axios.delete(`${API_URL}/api/entrantes/${id}`);
         const newEntrantes = datosEntrantes.filter(entrada => entrada._id !== id);
         setDatosEntrantes(newEntrantes);
         await Swal.fire({
@@ -92,7 +93,7 @@ function Entrantes() {
       fecha: fechita
     };
     try {
-      await axios.put(`/api/entrantes/${entranteToChange._id}`, newEntradaToUpdate);
+      await axios.put(`${API_URL}/api/entrantes/${entranteToChange._id}`, newEntradaToUpdate);
       //le pedimos  a la API nuevamente todos los datos actualizados...
       obtenerEntrantes();
     } catch {

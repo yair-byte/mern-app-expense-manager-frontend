@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../stylesheets/MediaQuerys.css';
+import { API_URL } from '../config.js';
 
 function InputEntrante() {
 
@@ -32,7 +33,7 @@ function InputEntrante() {
         monto: inputMonto,
         fecha: fechita
       }
-      await axios.post('/api/entrantes/', newEntrante);
+      await axios.post(`${API_URL}/api/entrantes/`, newEntrante);
       setRedirectHome(true);
       Swal.fire({
         title: 'Exito!',
