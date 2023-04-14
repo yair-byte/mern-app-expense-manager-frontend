@@ -1,0 +1,10 @@
+#botones-orden {
+    margin-top: 1rem;
+}
+
+@media (max-width: 500px) {
+    #botones-uptd-del {
+      flex-direction: column;
+    }
+}
+  

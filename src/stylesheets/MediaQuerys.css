@@ -1,0 +1,18 @@
+@media (max-width: 767px) {
+    .font-responsive {
+      font-size: 15px;
+    }
+}
+  
+@media (min-width: 768px) and (max-width: 1439px) {
+    .font-responsive {
+      font-size: 20px; 
+    }
+}
+  
+@media (min-width: 1440px) {
+    .font-responsive {
+      font-size: 25px; 
+    }
+}
+  
